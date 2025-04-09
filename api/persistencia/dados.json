@@ -1,0 +1,25 @@
+[
+  {
+    "nome": "Joao",
+    "cpf": "123",
+    "senha": "321",
+    "contas": [
+      {
+        "numero": "3211",
+        "saldo": 0,
+        "limiteCredito": 1000
+      },
+      {
+        "numero": "1232",
+        "saldo": 90000,
+        "limiteCredito": 1000
+      }
+    ]
+  },
+  {
+    "nome": "Maria",
+    "cpf": "456",
+    "senha": "654",
+    "contas": []
+  }
+]
