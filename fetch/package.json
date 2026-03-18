@@ -1,0 +1,16 @@
+{
+  "name": "fetchx",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "a2_fetch2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RR",
+  "license": "ISC",
+  "dependencies": {
+    "cross-fetch": "^3.1.5",
+    "node-fetch": "^3.2.10"
+  }
+}
