@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini Turtle</title>
+    <style>
+      body {
+        margin: 0;
+        background: #eee;
+      }
+      canvas {
+        background: white;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tela" width="1024" height="768"></canvas>
+
+    <script src="miniturtle.js"></script>
+
+    <script>
+      initTurtle("tela");
+      console.log("scale:", scale);
+      setScale(1);
+      startFill("red");
+
+      for (let i = 0; i < 4; i++) {
+        fd(100);
+        rt(90);
+      }
+
+      endFill();
+      console.log("scale:", scale);
+    </script>
+  </body>
+</html>
