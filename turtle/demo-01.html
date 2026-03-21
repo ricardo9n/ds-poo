@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini Turtle</title>
+    <style>
+      body {
+        margin: 0;
+        background: #eee;
+      }
+      canvas {
+        background: white;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tela" width="600" height="600"></canvas>
+
+    <script src="miniturtle.js"></script>
+
+    <script>
+      initTurtle("tela");
+      // =======================
+      // DEMO COMPLETO
+      // =======================
+
+      // limpar tela
+      clear("#f5f5f5");
+
+      // configurar
+      setWidth(3);
+      setSpeed(Infinity);
+
+      // -----------------------
+      // 1. Moldura (fd, rt, setColor)
+      // -----------------------
+
+      setColor("black");
+
+      for (let i = 0; i < 4; i++) {
+        fd(200);
+        rt(90);
+      }
+
+      // -----------------------
+      // 2. Reposicionamento (pu, setPosition)
+      // -----------------------
+
+      pu();
+      setPosition(getX() + 50, getY() + 50);
+      pd();
+
+      // -----------------------
+      // 3. Quadrado preenchido (startFill, endFill)
+      // -----------------------
+
+      startFill(0.2, 0.6, 1); // azul
+
+      for (let i = 0; i < 4; i++) {
+        fd(80);
+        rt(90);
+      }
+
+      endFill();
+
+      // -----------------------
+      // 4. Linha com setX / setY
+      // -----------------------
+
+      pu();
+      setX(getX() + 120);
+      setY(getY() - 40);
+      pd();
+
+      setColor("green");
+
+      fd(100);
+      bk(50);
+
+      // -----------------------
+      // 5. Arco no lugar (arc)
+      // -----------------------
+
+      setColor("purple");
+      arc(180, 40);
+
+      // -----------------------
+      // 6. Movimento em arco (rt com radius)
+      // -----------------------
+
+      setColor("red");
+
+      rt(180); // virar para baixo
+      rt(180, 60); // arco
+
+      // -----------------------
+      // 7. Escala (setScale)
+      // -----------------------
+
+      setScale(0.5);
+
+      setColor("orange");
+
+      for (let i = 0; i < 3; i++) {
+        fd(100);
+        rt(120);
+      }
+
+      setScale(1); // voltar ao normal
+
+      // -----------------------
+      // 8. Heading absoluto
+      // -----------------------
+
+      setHeading(0); // norte
+
+      pu();
+      setPosition(300, 300);
+      pd();
+
+      setColor("blue");
+
+      fd(80);
+
+      // -----------------------
+      // 9. Teste de RGB + alpha
+      // -----------------------
+
+      setColor(1, 0, 0, 0.5);
+
+      lt(90);
+      fd(80);
+
+      // -----------------------
+      // 10. Pequeno símbolo (mistura geral)
+      // -----------------------
+
+      pu();
+      setPosition(450, 150);
+      pd();
+
+      setColor("black");
+      setWidth(2);
+
+      // círculo
+      arc(360, 30);
+
+      // cruz dentro
+      pu();
+      setPosition(getX(), getY() - 30);
+      pd();
+
+      fd(60);
+      bk(30);
+      rt(90);
+      fd(30);
+      bk(60);
+
+      // -----------------------
+      // 11. Final
+      // -----------------------
+
+      ht(); // esconder turtle
+    </script>
+  </body>
+</html>

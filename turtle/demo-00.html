@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini Turtle</title>
+    <style>
+      body {
+        margin: 0;
+        background: #eee;
+      }
+      canvas {
+        background: white;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tela" width="600" height="600"></canvas>
+
+    <script src="miniturtle.js"></script>
+
+    <script>
+      initTurtle("tela");
+
+      // =======================
+      // EXEMPLOS
+      // =======================
+
+      // quadrado
+      setColor("blue");
+      for (let i = 0; i < 4; i++) {
+        fd(100);
+        rt(90);
+      }
+
+      // círculo
+      pu();
+      rt(90);
+      fd(150);
+      lt(90);
+      pd();
+
+      setColor("red");
+      arc(50, 360);
+    </script>
+  </body>
+</html>
