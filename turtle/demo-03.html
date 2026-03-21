@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini Turtle</title>
+    <style>
+      body {
+        margin: 0;
+        background: #eee;
+      }
+      canvas {
+        background: white;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tela" width="800" height="600"></canvas>
+
+    <script src="miniturtle.js"></script>
+
+    <script>
+      initTurtle("tela");
+      // =======================
+      // SETUP
+      // =======================
+
+      initTurtle("tela");
+      clear("#87CEEB"); // céu azul
+
+      setSpeed(Infinity);
+      setWidth(2);
+
+      // =======================
+      // 1. MAR
+      // =======================
+
+      pu();
+      setPosition(0, 250);
+      pd();
+
+      setColor(0, 0.4, 0.8);
+
+      startFill(0, 0.4, 0.8);
+
+      for (let i = 0; i < 2; i++) {
+        fd(1200);
+        rt(90);
+        fd(200);
+        rt(90);
+      }
+
+      endFill();
+
+      // =======================
+      // 2. AREIA
+      // =======================
+
+      pu();
+      setPosition(0, 450);
+      pd();
+
+      startFill(0.95, 0.85, 0.6);
+
+      for (let i = 0; i < 2; i++) {
+        fd(1200);
+        rt(90);
+        fd(200);
+        rt(90);
+      }
+
+      endFill();
+
+      // =======================
+      // 3. SOL
+      // =======================
+
+      pu();
+      setPosition(900, 100);
+      pd();
+
+      setColor("yellow");
+
+      startFill(1, 0.9, 0);
+
+      arc(360, 60);
+
+      endFill();
+
+      // =======================
+      // 4. COQUEIRO (tronco)
+      // =======================
+
+      pu();
+      setPosition(200, 380);
+      pd();
+
+      setColor(0.55, 0.27, 0.07);
+
+      startFill(0.55, 0.27, 0.07);
+
+      rt(90);
+
+      fd(120);
+      rt(90);
+      fd(20);
+      rt(90);
+      fd(120);
+      rt(90);
+      fd(20);
+
+      endFill();
+
+      // =======================
+      // 5. COQUEIRO (folhas)
+      // =======================
+
+      pu();
+      setPosition(210, 260);
+      pd();
+
+      setColor("green");
+
+      for (let i = 0; i < 6; i++) {
+        startFill(0, 0.6, 0);
+
+        fd(80);
+        rt(120);
+        fd(80);
+        rt(120);
+        fd(80);
+
+        endFill();
+
+        rt(60);
+      }
+
+      // =======================
+      // 6. PRÉDIOS
+      // =======================
+
+      function predio(x, altura, cor) {
+        pu();
+        setPosition(x, 350);
+        pd();
+
+        setColor(cor);
+
+        startFill(cor);
+
+        rt(0);
+
+        fd(80);
+        rt(90);
+        fd(altura);
+        rt(90);
+        fd(80);
+        rt(90);
+        fd(altura);
+        rt(90);
+
+        endFill();
+      }
+
+      // prédios diferentes
+      predio(500, 200, "gray");
+      predio(600, 150, "darkgray");
+      predio(700, 250, "lightgray");
+
+      // =======================
+      // 7. JANELAS
+      // =======================
+
+      function janela(x, y) {
+        pu();
+        setPosition(x, y);
+        pd();
+
+        startFill(1, 1, 0.6);
+
+        for (let i = 0; i < 4; i++) {
+          fd(10);
+          rt(90);
+        }
+
+        endFill();
+      }
+
+      // algumas janelas
+      for (let i = 0; i < 5; i++) {
+        janela(510, 330 - i * 30);
+        janela(610, 330 - i * 25);
+        janela(710, 330 - i * 35);
+      }
+
+      // =======================
+      // FINAL
+      // =======================
+
+      ht();
+    </script>
+  </body>
+</html>

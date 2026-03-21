@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mini Turtle</title>
+    <style>
+      body {
+        margin: 0;
+        background: #eee;
+      }
+      canvas {
+        background: white;
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tela" width="800" height="600"></canvas>
+
+    <script src="miniturtle.js"></script>
+
+    <script>
+      // =======================
+      // CASA
+      // =======================
+
+      initTurtle("tela");
+      clear("#87CEEB"); // céu
+
+      setSpeed(Infinity);
+      setWidth(2);
+
+      // =======================
+      // 1. CHÃO
+      // =======================
+
+      pu();
+      setPosition(0, 400);
+      pd();
+
+      startFill(0.4, 0.8, 0.4);
+
+      for (let i = 0; i < 2; i++) {
+        fd(1000);
+        rt(90);
+        fd(200);
+        rt(90);
+      }
+
+      endFill();
+
+      // =======================
+      // 2. PAREDE (AMARELA)
+      // =======================
+
+      pu();
+      setPosition(200, 350);
+      pd();
+
+      setColor("black");
+
+      startFill(1, 1, 0); // amarelo
+
+      for (let i = 0; i < 2; i++) {
+        fd(200);
+        rt(90);
+        fd(150);
+        rt(90);
+      }
+
+      endFill();
+
+      // =======================
+      // 3. TELHADO
+      // =======================
+
+      pu();
+      setPosition(200, 350);
+      pd();
+
+      setColor("brown");
+
+      startFill(0.6, 0.2, 0.2);
+
+      rt(0);
+
+      fd(200);
+      rt(135);
+      fd(140);
+      rt(90);
+      fd(140);
+
+      endFill();
+
+      // =======================
+      // 4. PORTA
+      // =======================
+
+      pu();
+      setPosition(280, 350);
+      pd();
+
+      setColor("black");
+
+      startFill(0.4, 0.2, 0);
+
+      for (let i = 0; i < 2; i++) {
+        fd(40);
+        rt(90);
+        fd(80);
+        rt(90);
+      }
+
+      endFill();
+
+      // =======================
+      // 5. JANELA
+      // =======================
+
+      pu();
+      setPosition(230, 280);
+      pd();
+
+      startFill(0.7, 0.9, 1);
+
+      for (let i = 0; i < 4; i++) {
+        fd(40);
+        rt(90);
+      }
+
+      endFill();
+
+      // cruz da janela
+      pu();
+      setPosition(230, 300);
+      pd();
+
+      fd(40);
+
+      pu();
+      setPosition(250, 280);
+      rt(90);
+      pd();
+
+      fd(40);
+
+      // =======================
+      // FINAL
+      // =======================
+
+      ht();
+    </script>
+  </body>
+</html>

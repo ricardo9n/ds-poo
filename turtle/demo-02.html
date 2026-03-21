@@ -16,17 +16,119 @@
     </style>
   </head>
   <body>
-    <canvas id="tela" width="600" height="600"></canvas>
+    <canvas id="tela" width="800" height="600"></canvas>
 
     <script src="miniturtle.js"></script>
 
     <script>
       initTurtle("tela");
       // =======================
-      // DEMO COMPLETO
+      // 12. Espiral (loop + padrão)
       // =======================
 
-      // limpar tela
-          </script>
+      pu();
+      setPosition(100, 400);
+      pd();
+
+      setColor("brown");
+
+      let d = 5;
+      for (let i = 0; i < 30; i++) {
+        fd(d);
+        rt(20);
+        d += 3;
+      }
+
+      // =======================
+      // 13. Estrela (ângulos)
+      // =======================
+
+      pu();
+      setPosition(250, 400);
+      pd();
+
+      setColor("gold");
+
+      for (let i = 0; i < 5; i++) {
+        fd(100);
+        rt(144);
+      }
+
+      // =======================
+      // 14. Função reutilizável
+      // =======================
+
+      function desenhaPoligono(lados, tamanho) {
+        for (let i = 0; i < lados; i++) {
+          fd(tamanho);
+          rt(360 / lados);
+        }
+      }
+
+      pu();
+      setPosition(400, 400);
+      pd();
+
+      setColor("blue");
+      desenhaPoligono(6, 50); // hexágono
+
+      // =======================
+      // 15. Gradiente manual (cores variando)
+      // =======================
+
+      pu();
+      setPosition(550, 400);
+      pd();
+
+      for (let i = 0; i < 10; i++) {
+        setColor(i / 10, 0, 1 - i / 10);
+        fd(50);
+        rt(36);
+      }
+
+      // =======================
+      // 16. Roseta (simetria)
+      // =======================
+
+      pu();
+      setPosition(700, 350);
+      pd();
+
+      setColor("purple");
+
+      for (let i = 0; i < 12; i++) {
+        fd(80);
+        bk(80);
+        rt(30);
+      }
+
+      // =======================
+      // 17. Múltiplos círculos
+      // =======================
+
+      pu();
+      setPosition(850, 350);
+      pd();
+
+      for (let i = 0; i < 5; i++) {
+        setColor(0, i / 5, 1);
+        arc(360, 20 + i * 10);
+      }
+
+      // =======================
+      // 18. Caminho aleatório (exploração)
+      // =======================
+
+      pu();
+      setPosition(1000, 350);
+      pd();
+
+      setColor("black");
+
+      for (let i = 0; i < 50; i++) {
+        fd(Math.random() * 50);
+        rt(Math.random() * 360);
+      }
+    </script>
   </body>
 </html>

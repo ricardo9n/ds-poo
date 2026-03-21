@@ -1,5 +1,7 @@
 # MiniTurtle.js
 
+AINDA NÃO ESTÁ FUNCIONAL!
+
 Uma implementação simples de **Turtle Graphics em JavaScript**, voltada para ensino de programação introdutória.
 
 Este projeto foi criado com foco didático, permitindo trabalhar conceitos fundamentais como:
