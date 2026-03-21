@@ -12,7 +12,6 @@ body {
   font-family: Arial;
 }
 
-/* EDITOR */
 #editor {
   width: 50%;
   display: flex;
@@ -38,14 +37,12 @@ textarea {
   resize: none;
 }
 
-/* DIVISOR */
 #divider {
   width: 6px;
   cursor: col-resize;
   background: #ddd;
 }
 
-/* CANVAS */
 #canvasContainer {
   flex: 1;
   display: flex;
@@ -61,69 +58,91 @@ canvas {
 
 <body>
 
-<!-- EDITOR -->
 <div id="editor">
   <div id="controls">
     <button onclick="novo()">New</button>
     <button onclick="executar()">Run</button>
     <button onclick="download()">Download</button>
     <button onclick="document.getElementById('fileInput').click()">Load</button>
+    <button onclick="exemplo()">Exemplos</button>
     <input type="file" id="fileInput" style="display:none" onchange="loadFile(event)" />
   </div>
 
-  <textarea id="code">
-initTurtle("tela");
-
-setColor("blue");
-setWidth(3);
-
-for (let i = 0; i < 4; i++) {
-  fd(100);
-  rt(90);
-}
-  </textarea>
+  <textarea id="code"></textarea>
 </div>
 
-<!-- DIVISOR -->
 <div id="divider"></div>
 
-<!-- CANVAS -->
 <div id="canvasContainer">
   <canvas id="tela"></canvas>
 </div>
 
-<!-- SUA BIBLIOTECA -->
 <script src="miniturtle.js"></script>
 
 <script>
 // =======================
-// RESIZE CANVAS
+// LOCAL STORAGE
+// =======================
+
+const STORAGE_KEY = "turtle_code";
+
+function salvarAutomatico() {
+  localStorage.setItem(STORAGE_KEY, code.value);
+}
+
+function carregarSalvo() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) code.value = saved;
+}
+
+// salva ao digitar
+const code = document.getElementById("code");
+code.addEventListener("input", salvarAutomatico);
+
+// =======================
+// CANVAS (SEM APAGAR)
 // =======================
 
 function resizeCanvas() {
   const canvas = document.getElementById("tela");
   const container = document.getElementById("canvasContainer");
 
+  // salvar imagem atual
+  const temp = document.createElement("canvas");
+  temp.width = canvas.width;
+  temp.height = canvas.height;
+  temp.getContext("2d").drawImage(canvas, 0, 0);
+
+  // redimensionar
   canvas.width = container.clientWidth;
   canvas.height = container.clientHeight;
+
+  // restaurar
+  canvas.getContext("2d").drawImage(temp, 0, 0);
 }
 
 // =======================
-// EXECUTAR
+// EXECUTAR + ERRO COM LINHA
 // =======================
 
 function executar() {
   try {
-    resizeCanvas(); // essencial
-
+    resizeCanvas();
     initTurtle("tela");
 
-    const codigo = document.getElementById("code").value;
+    const codigo = code.value;
+
     new Function(codigo)();
 
   } catch (e) {
-    alert("Erro: " + e.message);
     console.error(e);
+
+    let linha = "?";
+
+    const match = e.stack.match(/<anonymous>:(\d+):\d+/);
+    if (match) linha = match[1];
+
+    alert(`Erro na linha ${linha}: ${e.message}`);
   }
 }
 
@@ -133,7 +152,8 @@ function executar() {
 
 function novo() {
   if (confirm("Limpar código atual?")) {
-    document.getElementById("code").value = "";
+    code.value = "";
+    salvarAutomatico();
   }
 }
 
@@ -142,8 +162,7 @@ function novo() {
 // =======================
 
 function download() {
-  const codigo = document.getElementById("code").value;
-  const blob = new Blob([codigo], { type: "text/javascript" });
+  const blob = new Blob([code.value], { type: "text/javascript" });
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -161,15 +180,35 @@ function loadFile(event) {
 
   const reader = new FileReader();
 
-  reader.onload = function(e) {
-    document.getElementById("code").value = e.target.result;
+  reader.onload = e => {
+    code.value = e.target.result;
+    salvarAutomatico();
   };
 
   reader.readAsText(file);
 }
 
 // =======================
-// RESIZER (DRAG)
+// EXEMPLOS
+// =======================
+
+function exemplo() {
+  const ex = `initTurtle("tela");
+
+setColor("blue");
+setWidth(3);
+
+for (let i = 0; i < 36; i++) {
+  fd(150);
+  rt(170);
+}`;
+
+  code.value = ex;
+  salvarAutomatico();
+}
+
+// =======================
+// RESIZER
 // =======================
 
 const divider = document.getElementById("divider");
@@ -177,13 +216,8 @@ const editor = document.getElementById("editor");
 
 let dragging = false;
 
-divider.addEventListener("mousedown", () => {
-  dragging = true;
-});
-
-document.addEventListener("mouseup", () => {
-  dragging = false;
-});
+divider.addEventListener("mousedown", () => dragging = true);
+document.addEventListener("mouseup", () => dragging = false);
 
 document.addEventListener("mousemove", (e) => {
   if (!dragging) return;
@@ -192,7 +226,7 @@ document.addEventListener("mousemove", (e) => {
 
   if (percent > 10 && percent < 90) {
     editor.style.width = percent + "%";
-    resizeCanvas(); // atualiza em tempo real
+    resizeCanvas();
   }
 });
 
@@ -202,7 +236,7 @@ document.addEventListener("mousemove", (e) => {
 
 window.addEventListener("resize", resizeCanvas);
 
-// inicializa ao abrir
+carregarSalvo();
 resizeCanvas();
 initTurtle("tela");
 
