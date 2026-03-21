@@ -16,6 +16,38 @@ let visible = true;
 let filling = false;
 
 // =======================
+// CORES (CONSTANTES)
+// =======================
+
+const BLACK = "black";
+const GRAY = "gray";
+const SILVER = "silver";
+const WHITE = "white";
+
+const PINK = "pink";
+const RED = "red";
+const ORANGE = "orange";
+const COPPER = "#B87333";
+const APRICOT = "#FBCEB1";
+const GOLD = "gold";
+const YELLOW = "yellow";
+
+const UMBER = "#635147";
+const BRONZE = "#CD7F32";
+const BROWN = "brown";
+const DARK_BROWN = "#654321";
+
+const GREEN = "green";
+const LIME = "lime";
+
+const BABY_BLUE = "#89CFF0";
+const CYAN = "cyan";
+const BLUE = "blue";
+
+const VIOLET = "violet";
+const PURPLE = "purple";
+
+// =======================
 // INIT
 // =======================
 
@@ -76,8 +108,16 @@ function fd(d) {
   const nx = x + v.dx * dist;
   const ny = y + v.dy * dist;
 
-  if (filling) ctx.lineTo(nx, ny);
-  drawLine(x, y, nx, ny);
+  if (pen) {
+    if (filling) {
+      ctx.lineTo(nx, ny);
+    } else {
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(nx, ny);
+      ctx.stroke();
+    }
+  }
 
   x = nx;
   y = ny;
@@ -115,7 +155,8 @@ function lt(a, radius) {
 function arcMove(angle, radius, clockwise) {
   const steps = Math.max(10, Math.abs(angle));
   const stepAngle = angle / steps;
-  const stepLen = (2 * Math.PI * radius * scale) / 360;
+  // const stepLen = (2 * Math.PI * radius * scale) / 360;
+  const stepLen = (2 * Math.PI * radius) / 360;
 
   for (let i = 0; i < steps; i++) {
     if (clockwise) {
@@ -186,11 +227,12 @@ function startFill(...args) {
 }
 
 function endFill() {
-  filling = false;
   ctx.closePath();
   ctx.fill();
 
   if (pen) ctx.stroke();
+
+  filling = false;
 }
 
 // =======================
@@ -198,7 +240,11 @@ function endFill() {
 // =======================
 
 function setPosition(nx, ny) {
-  if (pen) drawLine(x, y, nx, ny);
+  if (filling) {
+    ctx.moveTo(nx, ny);
+  } else if (pen) {
+    drawLine(x, y, nx, ny);
+  }
   x = nx;
   y = ny;
 }
