@@ -154,15 +154,19 @@ function recorta_string(strint,i,f){
   return result;
 }
 
-console.log('=====================')
-let conexao = open_connection();
-// create_table_contatos(conexao);
-// drop_table_contatos(conexao);
-inserir_contato1(conexao);
-inserir_contato2(conexao);
-inserir_contato3(conexao);
-inserir_contato4(conexao);
-consulta_contatos(conexao);
-// drop_table_contatos(conexao);
-close(conexao);
-console.log('=====================M')
+function main(){
+  console.log('=====================')
+  let conexao = open_connection();
+  // create_table_contatos(conexao);
+  // drop_table_contatos(conexao);
+  inserir_contato1(conexao);
+  inserir_contato2(conexao);
+  inserir_contato3(conexao);
+  inserir_contato4(conexao);
+  consulta_contatos(conexao);
+  // drop_table_contatos(conexao);
+  close(conexao);
+  console.log('=====================M')
+}
+
+main()

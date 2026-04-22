@@ -13,7 +13,7 @@ const config = { //2
 }
 
 // Configurações de conexão com o banco de dados
-const connection = mysql.createConnection(
+const connection = mysql.createConnection( //3
   config
 );
 
@@ -26,7 +26,7 @@ const callback = function(err) {   //4
   }
 
 // Conectando ao banco de dados
-connection.connect( //3
+connection.connect( //5
   callback
 );
 
