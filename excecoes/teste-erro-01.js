@@ -1,0 +1,25 @@
+let {Conta} = require('./conta-v2');
+
+console.log("inicio do main");
+funcao1();
+console.log("fim do main");
+
+function funcao1() {
+    console.log("inicio do funcao1");
+    funcao2();
+    console.log("fim do funcao1");
+}
+
+function funcao2() {
+    console.log("inicio do funcao2");
+    cc = new Conta();
+    for (let i = 0; i <= 15; i++) {   
+        cc.deposita(i + 1000);
+        console.log(`saldo: ${cc.getSaldo()}`);
+        if (i == 5) {
+            cc = null;
+        }
+    }
+    console.log("fim do funcao2");
+}
+//teste-erro-01.js
